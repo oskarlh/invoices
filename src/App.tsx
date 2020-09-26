@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { I18nProvider } from './i18n';
 import Button from './components/Button';
-
 
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+function App(): ReactElement {
   return (
     <I18nProvider>
       <div className="App">

@@ -8,4 +8,3 @@ export type TranslationsMap = Record<Label, TextsByLanguage>;
 export const FALLBACK_LANGUAGE: Language = data.FALLBACK_LANGUAGE;
 export const LANGUAGES: readonly Language[] = data.LANGUAGES;
 export const TRANSLATIONS: TranslationsMap = data.TRANSLATIONS;
-
