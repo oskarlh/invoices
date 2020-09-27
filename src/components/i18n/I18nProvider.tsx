@@ -1,24 +1,16 @@
 import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 import I18nContext from './I18nContext';
-import { FALLBACK_LANGUAGE, LANGUAGES, Language } from './definitions';
+import { Language } from './definitions';
+import findPreferredLanguage from './findPreferredLanguage';
 
-function findPreferredLanguage(): Language {
-  for (const languagePreference of navigator.languages) {
-    for (const language of LANGUAGES) {
-      if (languagePreference.startsWith(language)) {
-        return language;
-      }
-    }
-  }
-  return FALLBACK_LANGUAGE;
-}
-
-interface I18nProviderProps {
+export interface I18nProviderProps {
   children: ReactNode;
+  language?: Language;
 }
 
 export default function I18nProvider({
   children,
+  language: forcedLanguage,
 }: I18nProviderProps): ReactElement {
   const [language, setLanguage] = useState(() => findPreferredLanguage());
 
@@ -33,6 +25,8 @@ export default function I18nProvider({
   }, []);
 
   return (
-    <I18nContext.Provider value={language}>{children}</I18nContext.Provider>
+    <I18nContext.Provider value={forcedLanguage || language}>
+      {children}
+    </I18nContext.Provider>
   );
 }

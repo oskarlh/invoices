@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
-import { I18nProvider } from './i18n';
-import Button from './components/Button';
+import { I18nProvider } from 'components/i18n';
+import Button from 'components/Button';
 
 import logo from './logo.svg';
-import './App.css';
+import './InvoicingApp.css';
 
 function App(): ReactElement {
   return (

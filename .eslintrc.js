@@ -14,9 +14,9 @@ module.exports = {
     sourceType: 'module', // Allows for the use of imports
   },
   rules: {
-    'sort-keys': ['warn', 'asc', { caseSensitive: true, minKeys: 2 }],
+		'@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    quotes: [2, 'single'],
+    'sort-keys': ['warn', 'asc', { caseSensitive: true, minKeys: 2 }],
   },
   root: true,
   settings: {

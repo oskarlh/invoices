@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { useTranslations } from 'i18n';
+import { useTranslations } from 'components/i18n';
 
 export default function Button(): ReactElement {
   const translate = useTranslations();
