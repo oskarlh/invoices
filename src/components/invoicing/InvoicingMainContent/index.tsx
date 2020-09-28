@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Router } from '@reach/router';
 
-import { classNames } from 'components';
+import { classNames } from 'utilities';
 
 import pageRoutes from 'components/invoicing/pages/pageRoutes';
 

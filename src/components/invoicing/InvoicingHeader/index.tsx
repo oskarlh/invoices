@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { classNames } from 'components';
-import { TranslationProps, withTranslation } from 'components/i18n';
+import { classNames } from 'utilities';
+import { useTranslation } from 'components/i18n';
 
 import styles from './styles.module.css';
 import logo from './logo.svg';
@@ -10,7 +10,8 @@ export interface Props {
   className?: string;
 }
 
-function InvoicingHeader({ className, translate }: Props & TranslationProps) {
+export default function InvoicingHeader({ className }: Props) {
+  const translate = useTranslation();
   return (
     <header className={classNames(styles.header, className)}>
       <img src={logo} className={styles.logo} alt={translate('logo')} />
@@ -18,5 +19,3 @@ function InvoicingHeader({ className, translate }: Props & TranslationProps) {
     </header>
   );
 }
-
-export default withTranslation(InvoicingHeader);

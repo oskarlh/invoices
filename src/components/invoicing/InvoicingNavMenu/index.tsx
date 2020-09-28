@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import { Link } from '@reach/router';
 
-import { classNames } from 'components';
-import { TranslationProps, withTranslation } from 'components/i18n';
+import { classNames } from 'utilities';
+import { useTranslation } from 'components/i18n';
 
 import pageRoutes from 'components/invoicing/pages/pageRoutes';
 
@@ -16,7 +16,8 @@ export interface Props {
   className?: string;
 }
 
-function InvoicingNavMenu({ className, translate }: Props & TranslationProps) {
+function InvoicingNavMenu({ className }: Props) {
+  const translate = useTranslation();
   return (
     <nav className={classNames(styles.menu, className)}>
       <ul>
@@ -40,4 +41,4 @@ function InvoicingNavMenu({ className, translate }: Props & TranslationProps) {
   );
 }
 
-export default withTranslation(memo(InvoicingNavMenu));
+export default memo(InvoicingNavMenu);

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { Invoice } from 'components/invoicing';
+import { Invoice } from 'data/invoicing/types';
 
 import styles from './styles.module.css';
 

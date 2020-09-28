@@ -1,3 +1,2 @@
-export { default as NavMenu } from './NavMenu';
+export { default as SimpleTable } from './SimpleTable';
 export { default as ThemeProvider } from './ThemeProvider';
-export { default as classNames } from './classNames';

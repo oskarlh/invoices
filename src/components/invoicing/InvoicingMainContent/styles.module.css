@@ -1,6 +1,7 @@
 .main {
   background: var(--theme-background-color);
   border: var(--theme-section-border);
+  border-radius: var(--theme-border-radius);
   display: flex;
   flex: 1;
   margin: var(--theme-section-padding);
