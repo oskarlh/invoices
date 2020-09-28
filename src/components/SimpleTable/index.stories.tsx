@@ -33,13 +33,13 @@ const rows: Row[] = [
     color: 'green',
     description: 'Description B',
     id: 5,
-    name: 'Name 1',
+    name: 'Name 0',
   },
   {
     color: 'red',
     description: 'Description A',
     id: 4,
-    name: 'Name 0',
+    name: 'Name 1',
   },
   {
     color: 'blue',
@@ -67,7 +67,7 @@ const Template = (args: any) => (
 );
 const StoryTemplate: Story<typeof Template> = Template;
 
-export const WithExampleData = StoryTemplate.bind({});
-WithExampleData.args = {
+export const Example = StoryTemplate.bind({});
+Example.args = {
   rows,
 };

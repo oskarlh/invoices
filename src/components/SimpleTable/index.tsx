@@ -1,5 +1,9 @@
 import React, { ReactElement, ReactNode, memo, useState } from 'react';
 
+import { classNames } from 'utilities';
+
+import styles from './styles.module.css';
+
 export interface Column<Row> {
   compareValues?: (a: Row, b: Row) => number;
   heading: ReactNode;
@@ -47,7 +51,14 @@ function SimpleTable<Row>({
       <thead>
         <tr>
           {columns.map((column) => (
-            <td key={column.key} onClick={() => onColumnHeaderClick(column)} className={h}>
+            <td
+              key={column.key}
+              onClick={() => onColumnHeaderClick(column)}
+              className={classNames(
+                styles.columnHeader,
+                column === columnToSortBy && styles.activeColumnHeader
+              )}
+            >
               {column.heading}
             </td>
           ))}
