@@ -1,0 +1,26 @@
+
+.menu {
+  background: var(--theme-background-color);
+  display: block;
+  flex-grow: 1;
+  padding: var(--theme-section-padding);
+  text-align: right;
+}
+.menu > ul {
+  padding: 0;
+  margin: 0;
+}
+.menu > ul > li {
+  display: inline-block;
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+.link {
+  color: currentColor;
+  margin: 0 1em;
+  text-decoration: underline;
+}
+.activeLink {
+  text-shadow: 0 0 0.06em currentColor;
+}

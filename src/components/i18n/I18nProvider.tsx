@@ -3,7 +3,7 @@ import I18nContext from './I18nContext';
 import { Language } from './definitions';
 import findPreferredLanguage from './findPreferredLanguage';
 
-export interface I18nProviderProps {
+export interface Props {
   children: ReactNode;
   language?: Language;
 }
@@ -11,7 +11,7 @@ export interface I18nProviderProps {
 export default function I18nProvider({
   children,
   language: forcedLanguage,
-}: I18nProviderProps): ReactElement {
+}: Props): ReactElement {
   const [language, setLanguage] = useState(() => findPreferredLanguage());
 
   // Change language if the user changes language preferences in their browser settings

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import InvoicingApp from 'components/invoicing-app/InvoicingApp';
+import InvoicingApp from 'components/invoicing/InvoicingApp';
 import * as serviceWorker from './serviceWorker';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>

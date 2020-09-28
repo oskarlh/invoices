@@ -3,17 +3,20 @@ import { render } from '@testing-library/react';
 
 import I18nProvider from './I18nProvider';
 import { Label, supportedLanguages, translations } from './definitions';
-import useTranslations from './useTranslations';
+import withTranslation, { TranslationProps } from './withTranslation';
 
 interface TestComponentProps {
   label: Label;
 }
-function TestComponent({ label }: TestComponentProps): ReactElement {
-  const text: string = useTranslations()(label);
-  return <>{text}</>;
-}
 
-describe('useTranslations', () => {
+const TestComponent = withTranslation(function TestComponent({
+  label,
+  translate,
+}: TestComponentProps & TranslationProps): ReactElement {
+  return <span>{translate(label)}</span>;
+});
+
+describe('withTranslation', () => {
   it('translates a label to every language', () => {
     const someLabel = Object.keys(translations)[0] as Label;
 

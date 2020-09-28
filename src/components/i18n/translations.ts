@@ -6,12 +6,24 @@ export const fallbackLanguage = 'en';
 
 // All translations
 export const translations = {
-  WELCOME: {
-    en: 'Welcome!',
-    sv: 'Välkommen!',
+  'invoicing/app name': {
+    en: 'Invoicing 1.0',
+    sv: 'Fakturering 1.0',
   },
-  WELCOME2: {
-    en: 'Welcome!',
-    sv: 'Välkommen!',
+  'invoicing/create invoice': {
+    en: 'Create Invoice',
+    sv: 'Skapa faktura',
+  },
+  'invoicing/invoices': {
+    en: 'Invoices',
+    sv: 'Fakturor',
+  },
+  'invoicing/page not found': {
+    en: 'Page not found',
+    sv: 'Sidan kunde inte hittas',
+  },
+  logo: {
+    en: 'Logo',
+    sv: 'Logga',
   },
 } as const;

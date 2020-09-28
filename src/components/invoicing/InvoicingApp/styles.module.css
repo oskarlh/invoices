@@ -1,0 +1,39 @@
+.app {
+  background: var(--theme-app-background-color);
+  color: var(--theme-text-color);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-size: var(--theme-font-size);
+}
+
+.header {
+}
+.headerAndMenu {
+  display: flex;
+  border-bottom: var(--theme-section-border);
+}
+.main {
+  
+}
+
+/*@media (max-width: 480px) {
+  .headerAndMenu {
+    display: block;
+  }
+}*/
+
+/*@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}*/

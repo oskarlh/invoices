@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://oskar-lh.name/invoices/",
   "dependencies": {
+    "@reach/router": "^1.3.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.6",
@@ -50,6 +51,7 @@
     "@storybook/node-logger": "^6.0.21",
     "@storybook/preset-create-react-app": "^3.1.4",
     "@storybook/react": "^6.0.21",
+    "@types/reach__router": "^1.3.6",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
     "babel-eslint": "10.1.0",
