@@ -1,7 +1,28 @@
-
-.columnHeader {
-  color: red;
+.table {
+  background: var(--theme-background-color);
+  border-collapse: collapse;
+  color: var(--theme-text-color);
+  font-size: var(--theme-font-size);
 }
-.activeColumnHeader {
-  color: green;
+
+.table > * > tr {
+  margin: 0;
+  padding: 0;
+}
+
+.table > * > tr > td {
+  margin: 0;
+  padding: 0 var(--theme-font-size);
+}
+
+.table > thead > tr {
+  font-size: 1.1em;
+  user-select: none;
+}
+.table > thead > tr > td {
+  border-bottom: var(--theme-section-border);
+}
+
+.activeColumnHeading {
+  text-decoration: underline;
 }

@@ -6,5 +6,6 @@ export type TranslationProps = I18nTranslationProps;
 
 export { default as I18nProvider } from './I18nProvider';
 export { supportedLanguages } from './definitions';
+export { default as Translate } from './Translate';
 export { default as useTranslation } from './useTranslation';
 export { default as withTranslation } from './withTranslation';

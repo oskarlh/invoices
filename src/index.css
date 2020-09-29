@@ -1,9 +1,12 @@
 html {
   height: 100%;
 }
-html, body, #root {
+html,
+body,
+#root {
   display: flex;
   flex-direction: column;
   flex: 1;
   margin: 0;
+  width: 100%;
 }

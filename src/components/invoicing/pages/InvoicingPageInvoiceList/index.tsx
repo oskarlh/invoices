@@ -11,7 +11,7 @@ import styles from './index.module.css';
 export default function InvoicingPageInvoiceList(
   props: RouteComponentProps
 ): ReactElement {
-  const [invoices, invoicesError] = usePromise(loadInvoiceList, []);
+  const [invoices, invoicesError] = usePromise<Invoice[]>(loadInvoiceList, []);
 
   if (invoicesError) {
     return <>{String(invoicesError)}</>;

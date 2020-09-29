@@ -5,6 +5,7 @@
   flex-direction: column;
   flex: 1;
   font-size: var(--theme-font-size);
+  width: 100%;
 }
 
 .header {
@@ -14,7 +15,6 @@
   border-bottom: var(--theme-section-border);
 }
 .main {
-  
 }
 
 /*@media (max-width: 480px) {

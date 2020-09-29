@@ -15,7 +15,7 @@ interface PageRoute {
   routingPath: string;
 }
 
-const pageRoutes: PageRoute[] = [
+export const pageRoutes: readonly PageRoute[] = [
   {
     Component: InvoicingPage404,
     defaultRoute: true,
@@ -24,15 +24,15 @@ const pageRoutes: PageRoute[] = [
   {
     Component: InvoicingPageInvoiceList,
     navMenuLabel: 'invoicing/invoices',
-    navMenuLinkPath: '.',
+    navMenuLinkPath: '/',
     routingPath: '/',
   },
   {
     Component: InvoicingPageCreateInvoice,
     navMenuLabel: 'invoicing/create invoice',
-    navMenuLinkPath: 'create',
-    routingPath: 'create',
+    navMenuLinkPath: '/create',
+    routingPath: '/create',
   },
 ];
 
-export default pageRoutes;
+export const rootPathPrefix = '/invoices';

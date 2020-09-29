@@ -20,6 +20,7 @@ export interface InvoiceLineItem {
 
 export interface Invoice extends HasId {
   currency: string;
+  dueDate: string;
   lineItems: InvoiceLineItem[];
   recipient: string;
 }

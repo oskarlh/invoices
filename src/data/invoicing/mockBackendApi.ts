@@ -2,7 +2,10 @@ import { HasId, Id, Invoice, WithoutId } from './types';
 
 const localStorageKey = 'invoicing';
 
+const modelVersion = 1;
+
 interface Storage {
+  modelVersion: number;
   nextId: Id;
   invoices: Invoice[];
 }
@@ -11,6 +14,7 @@ const initialStorage: Storage = {
   invoices: [
     {
       currency: 'SEK',
+      dueDate: '2020-10-20',
       id: 451,
       lineItems: [
         {
@@ -22,15 +26,17 @@ const initialStorage: Storage = {
       recipient: 'Example',
     },
   ],
+  modelVersion,
   nextId: 20380451,
 };
 
-type ListName = Exclude<keyof Storage, 'nextId'>;
+type ListName = Exclude<keyof Storage, 'modelVersion' | 'nextId'>;
 type ItemInList<LN extends ListName> = Storage[LN][Id];
 
 function loadStorage(): Storage {
   const json = localStorage.getItem(localStorageKey);
-  return json ? JSON.parse(json) : initialStorage;
+  const data = json ? JSON.parse(json) : null;
+  return data && data.modelVersion === modelVersion ? data : initialStorage;
 }
 
 function saveStorage(storage: Storage) {

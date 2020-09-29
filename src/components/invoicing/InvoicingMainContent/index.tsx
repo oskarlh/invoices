@@ -3,7 +3,10 @@ import { Router } from '@reach/router';
 
 import { classNames } from 'utilities';
 
-import pageRoutes from 'components/invoicing/pages/pageRoutes';
+import {
+  pageRoutes,
+  rootPathPrefix,
+} from 'components/invoicing/pages/pageRoutes';
 
 import styles from './styles.module.css';
 
@@ -14,7 +17,7 @@ export interface Props {
 function InvoicingMainContent({ className }: Props) {
   return (
     <main className={classNames(styles.main, className)}>
-      <Router>
+      <Router basepath={rootPathPrefix}>
         {pageRoutes.map(({ Component, defaultRoute, routingPath }, index) => (
           <Component key={index} default={defaultRoute} path={routingPath} />
         ))}

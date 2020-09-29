@@ -5,4 +5,15 @@
   display: flex;
   flex: 1;
   margin: var(--theme-section-padding);
+  padding: var(--theme-section-padding);
+  width: calc(100% - var(--theme-section-padding) * 4);
+}
+
+/* 
+  @reach/router's Router uses a div which causes styling issues. Let's disable its layout.
+  Watch out as they could change this in future updates
+*/
+.main > div,
+.pageContainer {
+  display: contents;
 }

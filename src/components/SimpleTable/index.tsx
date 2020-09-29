@@ -1,75 +1,68 @@
-import React, { ReactElement, ReactNode, memo, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
-import { classNames } from 'utilities';
+import { CellComponent, SimpleTableColumn, SimpleTableProps } from './types';
 
 import styles from './styles.module.css';
-
-export interface Column<Row> {
-  compareValues?: (a: Row, b: Row) => number;
-  heading: ReactNode;
-  renderValue?: (value: Row) => ReactNode;
-  key: keyof Row & string;
-}
-export interface Props<Row> {
-  columns: Column<Row>[];
-  rows: Row[];
-  uniqueKey?: keyof Row & string; // Used for the key prop
-}
+import { createRowSorter, rowElementKey } from './helpers';
+import { classNames, typedMemo } from 'utilities';
 
 function SimpleTable<Row>({
+  className,
   columns,
   rows,
-  uniqueKey,
-}: Props<Row>): ReactElement {
-  const [columnToSortBy, setColumnToSortBy] = useState<Column<Row> | null>(
-    null
-  );
+  idKey,
+}: SimpleTableProps<Row>): ReactElement {
+  const [columnToSortBy, setColumnToSortBy] = useState<
+    SimpleTableColumn<Row> | undefined
+  >();
 
   const [sortOrder, setSortOrder] = useState<1 | -1>(1);
 
-  const onColumnHeaderClick = (column: Column<Row>) => {
+  const onColumnHeadingClick = (column: SimpleTableColumn<Row>) => {
     if (columnToSortBy !== column || sortOrder === 1) {
       setColumnToSortBy(column);
     } else {
-      setColumnToSortBy(null);
+      setColumnToSortBy(undefined);
     }
     setSortOrder(columnToSortBy === column ? -1 : 1);
   };
 
-  let sortRows = (rows: Row[]) => rows;
-  if (columnToSortBy) {
-    const key = columnToSortBy.key;
-    const comparator =
-      columnToSortBy.compareValues ||
-      ((a: Row, b: Row) =>
-        sortOrder * (Number(a[key] > b[key]) - Number(a[key] < b[key])));
-    sortRows = (rows: Row[]) => [...rows].sort(comparator);
-  }
+  const sortRows = createRowSorter(columnToSortBy, sortOrder);
 
   return (
-    <table>
+    <table className={classNames(styles.table, className)}>
       <thead>
         <tr>
-          {columns.map((column) => (
+          {columns.map((column, index) => (
             <td
-              key={column.key}
-              onClick={() => onColumnHeaderClick(column)}
-              className={classNames(
-                styles.columnHeader,
-                column === columnToSortBy && styles.activeColumnHeader
-              )}
+              className={
+                column === columnToSortBy ? styles.activeColumnHeading : ''
+              }
+              key={index}
+              onClick={() => onColumnHeadingClick(column)}
             >
-              {column.heading}
+              {typeof column.heading === 'string' ? (
+                column.heading
+              ) : (
+                <column.heading />
+              )}
             </td>
           ))}
         </tr>
       </thead>
-      <tbody>
-        {sortRows(rows).map((row, index) => (
-          <tr key={String(uniqueKey ? row[uniqueKey] : index)}>
-            {columns.map(({ key, renderValue }) => (
-              <td key={key}>
-                {renderValue ? renderValue(row) : String(row[key])}
+      <tbody className={styles.tableBody}>
+        {sortRows(rows).map((row, rowIndex) => (
+          <tr key={rowElementKey(row, idKey, rowIndex)}>
+            {columns.map(({ cell }, columnIndex) => (
+              <td key={columnIndex}>
+                {(() => {
+                  if (typeof cell === 'string') {
+                    return String(row[cell as keyof Row]);
+                  } else {
+                    const Cell = cell as CellComponent<Row>;
+                    return <Cell row={row} />;
+                  }
+                })()}
               </td>
             ))}
           </tr>
@@ -78,4 +71,5 @@ function SimpleTable<Row>({
     </table>
   );
 }
-export default memo(SimpleTable);
+
+export default typedMemo(SimpleTable);

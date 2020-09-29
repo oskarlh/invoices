@@ -4,7 +4,10 @@ import { Link } from '@reach/router';
 import { classNames } from 'utilities';
 import { useTranslation } from 'components/i18n';
 
-import pageRoutes from 'components/invoicing/pages/pageRoutes';
+import {
+  pageRoutes,
+  rootPathPrefix,
+} from 'components/invoicing/pages/pageRoutes';
 
 import styles from './styles.module.css';
 
@@ -29,7 +32,7 @@ function InvoicingNavMenu({ className }: Props) {
                 <Link
                   className={styles.link}
                   getProps={getLinkProps}
-                  to={navMenuLinkPath}
+                  to={rootPathPrefix + navMenuLinkPath}
                 >
                   {translate(navMenuLabel)}
                 </Link>
