@@ -146,7 +146,7 @@ function InvoicingInvoiceForm({
           required
         />
         <StyledTextArea value={notes} onChange={setNotes}>
-          Notes
+          {translate('invoicing/notes')}
         </StyledTextArea>
         <InvoicingCurrencySelector currency={currency} onChange={setCurrency} />
         <InvoicingLineItemsInput

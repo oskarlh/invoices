@@ -42,6 +42,10 @@ export const translations = {
     en: 'Description',
     sv: 'Beskrivning',
   },
+  'invoicing/notes': {
+    en: 'Notes/instructions',
+    sv: 'Anteckningar/anvisningar',
+  },
   'invoicing/page not found': {
     en: 'Page not found',
     sv: 'Sidan kunde inte hittas',
