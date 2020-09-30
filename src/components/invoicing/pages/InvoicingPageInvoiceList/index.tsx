@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import usePromise from 'react-use-promise';
 

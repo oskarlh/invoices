@@ -2,7 +2,7 @@ import { HasId, Id, Invoice, WithoutId } from './types';
 
 const localStorageKey = 'invoicing';
 
-const modelVersion = 6; // Change this to clear local storage while developing
+const modelVersion = 1; // Change this to clear local storage while developing
 
 interface Storage {
   modelVersion: number;
@@ -27,6 +27,27 @@ const initialStorage: Storage = {
       notes: 'Julia bought 100 potatoes. Time to pay.',
       paid: false,
       title: 'Purchase of 100 potatoes',
+    },
+    {
+      currency: 'EUR',
+      dueDate: '2020-04-12',
+      emailAddress: 'marko@example.com',
+      id: 123,
+      lineItems: [
+        {
+          description: 'Car, Volvo',
+          quantity: 1,
+          unitPrice: 250_000,
+        },
+        {
+          description: 'Router, MikroTik',
+          quantity: 2,
+          unitPrice: 12012,
+        },
+      ],
+      notes: 'I should probably write payment instructions here...',
+      paid: false,
+      title: 'Car & Router',
     },
   ],
   modelVersion,

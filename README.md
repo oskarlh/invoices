@@ -1,4 +1,13 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can see the app at [https://oskar-lh.name/invoices/](https://oskar-lh.name/invoices/).
+You can see some of the components in a Storybook at [https://oskar-lh.name/invoices/storybook](https://oskar-lh.name/invoices/storybook).
+
+## Dark mode
+
+The app uses different colours when a user has enabled a dark theme for thier operating system.
+
+## Two languages
+
+Texts are in English or Swedish depending on your browser settings. This is achieved by inspecting navigator.languages.
 
 ## Available Scripts
 
