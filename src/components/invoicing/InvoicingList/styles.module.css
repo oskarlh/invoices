@@ -5,6 +5,12 @@
   padding: var(--theme-section-padding);
   width: 100%;
 }
+.controlsCell {
+  text-align: right;
+}
+.controlsLink {
+  color: var(--theme-link-color);
+}
 .table {
   width: 100%;
 }

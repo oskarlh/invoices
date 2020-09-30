@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  position: relative;
+}
+.labelText {
+  margin-left: 2em;
+  margin-top: 0.2em;
+  position: absolute;
+  opacity: 0.8;
+}
+.textarea {
+  background-color: var(--theme-input-background-color);
+  border: var(--theme-section-border);
+  border-radius: var(--theme-border-radius);
+  flex: 1;
+  padding: var(--theme-section-padding);
+  padding-top: calc(var(--theme-section-padding) + 1em);
+}
+.labelText,
+.textarea {
+  color: var(--theme-text-color);
+  font-size: var(--theme-font-size);
+  font-family: var(--theme-font-family);
+}

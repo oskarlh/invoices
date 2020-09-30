@@ -19,12 +19,14 @@ function SimpleTable<Row>({
   const [sortOrder, setSortOrder] = useState<1 | -1>(1);
 
   const onColumnHeadingClick = (column: SimpleTableColumn<Row>) => {
-    if (columnToSortBy !== column || sortOrder === 1) {
-      setColumnToSortBy(column);
-    } else {
-      setColumnToSortBy(undefined);
+    if (column.compare) {
+      if (columnToSortBy !== column || sortOrder === 1) {
+        setColumnToSortBy(column);
+      } else {
+        setColumnToSortBy(undefined);
+      }
+      setSortOrder(columnToSortBy === column ? -1 : 1);
     }
-    setSortOrder(columnToSortBy === column ? -1 : 1);
   };
 
   const sortRows = createRowSorter(columnToSortBy, sortOrder);
@@ -41,7 +43,8 @@ function SimpleTable<Row>({
               key={index}
               onClick={() => onColumnHeadingClick(column)}
             >
-              {typeof column.heading === 'string' ? (
+              {typeof column.heading === 'string' ||
+              column.heading === undefined ? (
                 column.heading
               ) : (
                 <column.heading />
@@ -51,16 +54,18 @@ function SimpleTable<Row>({
         </tr>
       </thead>
       <tbody className={styles.tableBody}>
-        {sortRows(rows).map((row, rowIndex) => (
-          <tr key={rowElementKey(row, idKey, rowIndex)}>
-            {columns.map(({ cell }, columnIndex) => (
-              <td key={columnIndex}>
+        {sortRows(rows).map(([row, originalRowIndex]) => (
+          <tr
+            key={rowElementKey(row as Row, idKey, originalRowIndex as number)}
+          >
+            {columns.map(({ cell, cellClassName }, columnIndex) => (
+              <td key={columnIndex} className={cellClassName}>
                 {(() => {
                   if (typeof cell === 'string') {
-                    return String(row[cell as keyof Row]);
+                    return String((row as Row)[cell as keyof Row]);
                   } else {
                     const Cell = cell as CellComponent<Row>;
-                    return <Cell row={row} />;
+                    return <Cell row={row as Row} />;
                   }
                 })()}
               </td>

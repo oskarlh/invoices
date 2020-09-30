@@ -1,10 +1,6 @@
-// Make it bigint or string if full 64-bit id
-export type Id = number;
+import { Currency } from './currencies';
 
-// In a real app Money should probably be an integer to avoid
-// precision errors, especially for currencies with many decimals.
-// But to keep things simple, let's not do that.
-export type Money = number;
+export type Id = number;
 
 export type WithoutId<T> = Omit<T, 'id'>;
 
@@ -13,14 +9,17 @@ export interface HasId {
 }
 
 export interface InvoiceLineItem {
-  baseValue: Money;
-  count: number;
+  unitPrice: number;
+  quantity: number;
   description: string;
 }
 
 export interface Invoice extends HasId {
-  currency: string;
+  currency: Currency;
   dueDate: string;
+  emailAddress: string;
   lineItems: InvoiceLineItem[];
-  recipient: string;
+  notes: string;
+  paid: boolean;
+  title: string;
 }

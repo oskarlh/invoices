@@ -1,4 +1,5 @@
 export { default as InvoicingApp } from './InvoicingApp';
+export { default as InvoicingCurrencySelector } from './InvoicingCurrencySelector';
 export { default as InvoicingHeader } from './InvoicingHeader';
 export { default as InvoicingInvoiceForm } from './InvoicingInvoiceForm';
 export { default as InvoicingList } from './InvoicingList';

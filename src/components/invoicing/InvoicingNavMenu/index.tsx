@@ -1,19 +1,14 @@
 import React, { memo } from 'react';
-import { Link } from '@reach/router';
 
 import { classNames } from 'utilities';
 import { useTranslation } from 'components/i18n';
-
+import StyledLink from 'components/StyledLink';
 import {
   pageRoutes,
   rootPathPrefix,
 } from 'components/invoicing/pages/pageRoutes';
 
 import styles from './styles.module.css';
-
-function getLinkProps({ isCurrent }: { isCurrent: boolean }) {
-  return { className: classNames(styles.link, isCurrent && styles.activeLink) };
-}
 
 export interface Props {
   className?: string;
@@ -29,13 +24,13 @@ function InvoicingNavMenu({ className }: Props) {
             navMenuLabel &&
             navMenuLinkPath && (
               <li key={index}>
-                <Link
+                <StyledLink
+                  activeClassName={styles.activeLink}
                   className={styles.link}
-                  getProps={getLinkProps}
                   to={rootPathPrefix + navMenuLinkPath}
                 >
                   {translate(navMenuLabel)}
-                </Link>
+                </StyledLink>
               </li>
             )
         )}

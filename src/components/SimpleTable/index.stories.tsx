@@ -32,8 +32,7 @@ function EnglishNumberCell({
 const columns: SimpleTableColumn<Row>[] = [
   {
     cell: 'name',
-    compare: 'name',
-    heading: 'Name',
+    heading: 'Name (sorting disabled)',
   },
   {
     cell: 'fruit',
@@ -44,6 +43,9 @@ const columns: SimpleTableColumn<Row>[] = [
     cell: ColorCell,
     compare: 'color',
     heading: 'Color (custom rendering)',
+  },
+  {
+    cell: () => <>Column without heading</>,
   },
   {
     cell: EnglishNumberCell,

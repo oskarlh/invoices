@@ -1,10 +1,11 @@
 import { ComponentType } from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, navigate } from '@reach/router';
 
 import { Label } from 'components/i18n';
 
 import InvoicingPage404 from './InvoicingPage404';
 import InvoicingPageCreateInvoice from './InvoicingPageCreateInvoice';
+import InvoicingPageEditInvoice from './InvoicingPageEditInvoice';
 import InvoicingPageInvoiceList from './InvoicingPageInvoiceList';
 
 interface PageRoute {
@@ -33,6 +34,14 @@ export const pageRoutes: readonly PageRoute[] = [
     navMenuLinkPath: '/create',
     routingPath: '/create',
   },
+  {
+    Component: InvoicingPageEditInvoice,
+    routingPath: '/edit/:invoiceId',
+  },
 ];
 
 export const rootPathPrefix = '/invoices';
+
+export function navigateTo(to: string) {
+  navigate(to.startsWith('/') ? rootPathPrefix + to : to);
+}

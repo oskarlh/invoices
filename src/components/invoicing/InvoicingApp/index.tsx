@@ -17,10 +17,10 @@ function App(): ReactElement {
       <ThemeProvider>
         <div className={styles.app}>
           <div className={styles.headerAndMenu}>
-            <InvoicingHeader className={styles.header} />
-            <InvoicingNavMenu className={styles.menu} />
+            <InvoicingHeader />
+            <InvoicingNavMenu />
           </div>
-          <InvoicingMainContent className={styles.main} />
+          <InvoicingMainContent />
         </div>
       </ThemeProvider>
     </I18nProvider>

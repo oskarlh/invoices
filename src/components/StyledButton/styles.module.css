@@ -1,0 +1,14 @@
+.button {
+  background-color: var(--theme-input-background-color);
+  border: var(--theme-section-border);
+  border-radius: var(--theme-border-radius);
+  color: var(--theme-text-color);
+  font-size: var(--theme-font-size);
+  padding: var(--theme-section-padding);
+}
+.button:active {
+  transform: translate(1px, 1px);
+}
+.button:disabled {
+  opacity: 0.5;
+}

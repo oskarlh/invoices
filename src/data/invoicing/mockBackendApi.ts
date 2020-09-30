@@ -2,7 +2,7 @@ import { HasId, Id, Invoice, WithoutId } from './types';
 
 const localStorageKey = 'invoicing';
 
-const modelVersion = 1;
+const modelVersion = 6; // Change this to clear local storage while developing
 
 interface Storage {
   modelVersion: number;
@@ -15,15 +15,18 @@ const initialStorage: Storage = {
     {
       currency: 'SEK',
       dueDate: '2020-10-20',
+      emailAddress: 'julia@example.com',
       id: 451,
       lineItems: [
         {
-          baseValue: 40.5,
-          count: 10,
           description: 'Potatoes',
+          quantity: 100,
+          unitPrice: 2.5,
         },
       ],
-      recipient: 'Example',
+      notes: 'Julia bought 100 potatoes. Time to pay.',
+      paid: false,
+      title: 'Purchase of 100 potatoes',
     },
   ],
   modelVersion,
@@ -53,7 +56,10 @@ export async function loadListItem<LN extends ListName>(
   listName: LN,
   id: Id
 ): Promise<ItemInList<LN>> {
-  const itemInStorage: ItemInList<LN> | undefined = loadStorage()[listName][id];
+  const itemInStorage: ItemInList<LN> | undefined = loadStorage()[
+    listName
+  ].find(({ id: itemId }) => itemId === id);
+
   if (!itemInStorage) {
     throw new Error('Item not found');
   }

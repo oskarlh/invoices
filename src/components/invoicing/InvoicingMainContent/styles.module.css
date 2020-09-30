@@ -5,8 +5,12 @@
   display: flex;
   flex: 1;
   margin: var(--theme-section-padding);
+  overflow-x: auto;
   padding: var(--theme-section-padding);
-  width: calc(100% - var(--theme-section-padding) * 4);
+  width: calc(
+    100% - var(--theme-section-padding) * 4 - var(--theme-section-border-width) *
+      2
+  );
 }
 
 /* 

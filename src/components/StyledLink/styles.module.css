@@ -1,0 +1,6 @@
+.link {
+  color: var(--theme-link-color);
+}
+.activeLink {
+  text-shadow: 0 0 0.06em currentColor;
+}

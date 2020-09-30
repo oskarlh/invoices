@@ -5,6 +5,6 @@ export function classNames(...names: ClassName[]): string {
   return names.filter((n) => !!n).join(' ');
 }
 
-// Can't just use memo straight with generic components.
-// memo doesn't work with generics
+// Memo has a bad type so you can't just use it straight with generic components.
+// Setting the type like this fixes the issue.
 export const typedMemo: <T>(c: T) => T = memo;

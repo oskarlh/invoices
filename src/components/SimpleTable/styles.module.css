@@ -2,6 +2,7 @@
   background: var(--theme-background-color);
   border-collapse: collapse;
   color: var(--theme-text-color);
+  font-family: var(--theme-font-family);
   font-size: var(--theme-font-size);
 }
 
@@ -12,7 +13,7 @@
 
 .table > * > tr > td {
   margin: 0;
-  padding: 0 var(--theme-font-size);
+  padding: 0.08em 1em;
 }
 
 .table > thead > tr {
