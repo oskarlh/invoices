@@ -9,7 +9,7 @@ The app uses different colours when a user has enabled a dark theme for their op
 
 Texts are in English or Swedish depending on your browser settings. This is achieved by inspecting navigator.languages.
 
-## Available Scripts
+## Available scripts
 
 In the project directory, you can run:
 
