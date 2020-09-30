@@ -6,6 +6,10 @@ export const fallbackLanguage = 'en';
 
 // All translations
 export const translations = {
+  edit: {
+    en: 'Edit',
+    sv: 'Redigera',
+  },
   'invoicing/app name': {
     en: 'Invoicing App 1.0',
     sv: 'Faktureringsapp 1.0',

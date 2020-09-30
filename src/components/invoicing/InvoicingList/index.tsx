@@ -24,7 +24,7 @@ function ControlsCell({ row: { id } }: { row: Invoice }) {
   return (
     <>
       <StyledLink className={styles.controlsLink} to={'edit/' + id}>
-        Edit
+        <Translate label="edit" />
       </StyledLink>
     </>
   );
