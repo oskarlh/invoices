@@ -3,7 +3,7 @@ You can see some of the components in a Storybook at [https://oskar-lh.name/invo
 
 ## Dark mode
 
-The app uses different colours when a user has enabled a dark theme for thier operating system.
+The app uses different colours when a user has enabled a dark theme for their operating system.
 
 ## Two languages
 
