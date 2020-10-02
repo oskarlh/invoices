@@ -1,6 +1,6 @@
 import React, { memo, ReactElement } from 'react';
 
-import { Translate } from 'components/i18n';
+import { Translate, useTranslation } from 'components/i18n';
 import { Invoice } from 'data/invoicing/types';
 
 import { SimpleTable, SimpleTableColumn, StyledLink } from 'components';
@@ -31,12 +31,13 @@ function ControlsCell({ row: { id } }: { row: Invoice }) {
 }
 
 function DueDateCell({ row: { dueDate, paid } }: { row: Invoice }) {
+  const overdueAriaLabel = useTranslation()('invoicing/overdue');
   // TODO: Handle time zone differences somehow
   const isOverdue = !paid && new Date(dueDate).getTime() >= Date.now();
   return (
     <>
       {isOverdue && (
-        <span aria-label="Overdue " role="img">
+        <span aria-label={overdueAriaLabel} role="img">
           ⚠️
         </span>
       )}
@@ -88,11 +89,11 @@ export interface Props {
 function InvoicingList({ invoices }: Props) {
   return (
     <div className={styles.container}>
-      <SimpleTable<Invoice>
+      <SimpleTable
         className={styles.table}
         columns={columns}
         rows={invoices}
-        idKey="id"
+        rowKey="id"
       />
     </div>
   );

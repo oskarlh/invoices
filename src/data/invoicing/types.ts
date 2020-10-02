@@ -5,21 +5,21 @@ export type Id = number;
 export type WithoutId<T> = Omit<T, 'id'>;
 
 export interface HasId {
-  id: Id;
+  readonly id: Id;
 }
 
 export interface InvoiceLineItem {
-  unitPrice: number;
-  quantity: number;
-  description: string;
+  readonly unitPrice: number;
+  readonly quantity: number;
+  readonly description: string;
 }
 
 export interface Invoice extends HasId {
-  currency: Currency;
-  dueDate: string;
-  emailAddress: string;
-  lineItems: InvoiceLineItem[];
-  notes: string;
-  paid: boolean;
-  title: string;
+  readonly currency: Currency;
+  readonly dueDate: string;
+  readonly emailAddress: string;
+  readonly lineItems: InvoiceLineItem[];
+  readonly notes: string;
+  readonly paid: boolean;
+  readonly title: string;
 }

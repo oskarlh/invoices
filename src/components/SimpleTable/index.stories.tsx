@@ -20,13 +20,15 @@ function ColorCell({ row: { color } }: { row: Row }) {
 }
 
 function EnglishNumberCell({
+  extra: prefix,
   row: {
     englishNumber: { word },
   },
 }: {
+  extra: string;
   row: Row;
 }) {
-  return <em>Number {word}</em>;
+  return <em>{prefix + ' ' + word}</em>;
 }
 
 const columns: SimpleTableColumn<Row>[] = [
@@ -37,7 +39,9 @@ const columns: SimpleTableColumn<Row>[] = [
   {
     cell: 'fruit',
     compare: 'fruit',
-    heading: 'Fruit',
+    heading: ({ extra: style }) => (
+      <span style={style}>Fruit (custom heading)</span>
+    ),
   },
   {
     cell: ColorCell,
@@ -49,8 +53,10 @@ const columns: SimpleTableColumn<Row>[] = [
   },
   {
     cell: EnglishNumberCell,
-    compare: (a: Row, b: Row) =>
-      a.englishNumber.number - b.englishNumber.number,
+    compare: (a: Row, b: Row, orderEnglishNumbersAlphabetically: boolean) =>
+      orderEnglishNumbersAlphabetically
+        ? a.englishNumber.word.localeCompare(b.englishNumber.word)
+        : a.englishNumber.number - b.englishNumber.number,
     heading: 'English numbers (custom sorting and rendering)',
   },
 ];
@@ -112,11 +118,21 @@ export default {
 } as Meta;
 
 const Template = (args: any) => (
-  <SimpleTable columns={columns} rows={rows} idKey="id" {...args} />
+  <SimpleTable
+    columns={columns}
+    extraForCells={args.textBeforeEnglishNumbers}
+    extraForComparators={args.orderEnglishNumbersAlphabetically}
+    extraForHeadings={args.fruitHeadingStyle}
+    rows={rows}
+    rowKey="id"
+  />
 );
 const StoryTemplate: Story<typeof Template> = Template;
 
 export const Example = StoryTemplate.bind({});
 Example.args = {
+  fruitHeadingStyle: { color: '#F00', fontStyle: 'italic' },
+  orderEnglishNumbersAlphabetically: false,
   rows,
+  textBeforeEnglishNumbers: 'Number',
 };

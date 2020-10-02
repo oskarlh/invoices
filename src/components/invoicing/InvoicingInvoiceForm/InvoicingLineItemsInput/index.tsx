@@ -1,8 +1,17 @@
-import React, { memo, ReactElement, useCallback, useState } from 'react';
+import React, {
+  memo,
+  ReactElement,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import { InvoiceLineItem } from 'data/invoicing/types';
 import { SimpleTable, SimpleTableColumn } from 'components';
-import { StyledButton, StyledInput } from 'components';
 import { Translate } from 'components/i18n';
+
+import DeleteButtonCell from './DeleteButtonCell';
+import InputCell from './InputCell';
+import { Callbacks, extraEmptyItem } from './common';
 
 import styles from './styles.module.css';
 
@@ -11,106 +20,58 @@ export interface Props {
   onChange?: (items: InvoiceLineItem[]) => void;
 }
 
-const extraEmptyItem: InvoiceLineItem = {
-  description: '',
-  quantity: 1,
-  unitPrice: 0,
-};
-
-interface Callbacks {
-  onDelete: (item: InvoiceLineItem) => void;
-  onChange: (
-    field: keyof InvoiceLineItem,
-    newValue: string,
-    item: InvoiceLineItem
-  ) => void;
-}
-
-function createColumns(
-  callbacks: Callbacks
-): SimpleTableColumn<InvoiceLineItem>[] {
-  return [
-    {
-      cell: ({ row }) => (
-        <StyledInput
-          type="text"
-          onChange={(event: React.FormEvent<HTMLInputElement>) => {
-            const target = event.target as HTMLInputElement;
-            callbacks.onChange('description', target.value, row);
-          }}
-          value={row.description}
-        />
-      ),
-      compare: 'description',
-      heading: () => <Translate label="invoicing/item description" />,
-    },
-    {
-      cell: ({ row }) => (
-        <StyledInput
-          type="number"
-          onChange={(event: React.FormEvent<HTMLInputElement>) => {
-            const target = event.target as HTMLInputElement;
-            callbacks.onChange('quantity', target.value, row);
-          }}
-          value={row.quantity}
-        />
-      ),
-      heading: () => <Translate label="quantity" />,
-    },
-    {
-      cell: ({ row }) => (
-        <StyledInput
-          type="number"
-          step="0.01"
-          onChange={(event: React.FormEvent<HTMLInputElement>) => {
-            const target = event.target as HTMLInputElement;
-            callbacks.onChange('unitPrice', target.value, row);
-          }}
-          value={row.unitPrice}
-        />
-      ),
-      heading: () => <Translate label="invoicing/price per item" />,
-    },
-    {
-      cell: ({ row }) => (
-        <StyledButton
-          disabled={row === extraEmptyItem}
-          onClick={() => callbacks.onDelete(row)}
-        >
-          <span aria-label="Delete" role="img">
-            ❌
-          </span>
-        </StyledButton>
-      ),
-    },
-  ];
-}
+const columns: SimpleTableColumn<InvoiceLineItem>[] = [
+  {
+    cell: (props) => (
+      <InputCell invoiceField="description" type="text" {...props} />
+    ),
+    compare: 'description',
+    heading: () => <Translate label="invoicing/item description" />,
+  },
+  {
+    cell: (props) => (
+      <InputCell invoiceField="quantity" type="number" {...props} />
+    ),
+    heading: () => <Translate label="quantity" />,
+  },
+  {
+    cell: (props) => (
+      <InputCell invoiceField="unitPrice" type="number" {...props} />
+    ),
+    heading: () => <Translate label="invoicing/price per item" />,
+  },
+  {
+    cell: DeleteButtonCell,
+  },
+];
 
 function InvoicingLineItemsInput({
   existingLineItems,
   onChange,
 }: Props): ReactElement {
   const [items, setItems] = useState(() => [...(existingLineItems || [])]);
-  const [callbacks] = useState<Partial<Callbacks>>({});
-  callbacks.onDelete = useCallback(
+
+  const stableItemsRef = Object.assign(useState({}), {
+    items,
+  });
+
+  const onDelete = useCallback(
     (item: InvoiceLineItem) => {
-      const newArray = items.filter((i) => i !== item);
+      const newArray = stableItemsRef.items.filter((i) => i !== item);
       setItems(newArray);
       onChange && onChange(newArray);
     },
-    [items, onChange]
+    [stableItemsRef, onChange]
   );
-  callbacks.onChange = useCallback(
+
+  const onValueChange = useCallback(
     (field: keyof InvoiceLineItem, newValue: string, item: InvoiceLineItem) => {
-      const newObject: InvoiceLineItem = { ...item };
+      const newObject: InvoiceLineItem = {
+        ...item,
+        [field]: field === 'description' ? newValue : Number(newValue),
+      };
 
-      if (field === 'description') {
-        newObject[field] = newValue;
-      } else if (field === 'quantity' || field === 'unitPrice') {
-        newObject[field] = Number(newValue);
-      }
-
-      const newArray: InvoiceLineItem[] = [...items];
+      const newArray: InvoiceLineItem[] = [...stableItemsRef.items];
       if (item === extraEmptyItem) {
         newArray.push(newObject);
       } else {
@@ -119,15 +80,22 @@ function InvoicingLineItemsInput({
       setItems(newArray);
       onChange && onChange(newArray);
     },
-    [items, onChange]
+    [stableItemsRef, onChange]
   );
 
-  const [columns] = useState(() => createColumns(callbacks as Callbacks));
+  const callbacks: Callbacks = useMemo(
+    () => ({
+      onDelete,
+      onValueChange,
+    }),
+    [onDelete, onValueChange]
+  );
 
   return (
     <SimpleTable<InvoiceLineItem>
       className={styles.table}
       columns={columns}
+      extraForCells={callbacks}
       rows={[...items, extraEmptyItem]}
     />
   );

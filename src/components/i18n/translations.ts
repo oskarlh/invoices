@@ -50,6 +50,10 @@ export const translations = {
     en: 'Notes/instructions',
     sv: 'Anteckningar/anvisningar',
   },
+  'invoicing/overdue': {
+    en: 'Overdue',
+    sv: 'Försenad',
+  },
   'invoicing/page not found': {
     en: 'Page not found',
     sv: 'Sidan kunde inte hittas',
